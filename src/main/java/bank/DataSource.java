@@ -32,18 +32,26 @@ public class DataSource {
           PreparedStatement statement = connection.prepareStatement(sql)){
 
             statement.setString(1,username);
+
             try( ResultSet resultSet = statement.executeQuery()){
               customer = new Customer(
-                resultSet.getInt(columnLabel: "id"), username, username, sql, 0)
+                resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("username"),
+                resultSet.getString("password"),
+                resultSet.getInt("account_id"));
             }
 
       } catch(SQLException e) {
           e.printStackTrace();
       }
+
+      return customer;
   }
 
     public static void main(String[] args){
-      connect();
+      Customer customer = getCustomer("twest8o@friendfeed.com");
+      System.out.println(customer.getName());
     }
   }
 
