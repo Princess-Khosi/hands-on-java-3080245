@@ -48,7 +48,7 @@ public class DataSource {
       return customer;
   }
 
-  private static Account getAccount(int accountId) {
+  public static Account getAccount(int accountId) {
     String sql = "select * from accounts where id = ? ";
     Account account = null;
 
