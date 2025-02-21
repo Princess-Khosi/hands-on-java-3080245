@@ -15,6 +15,7 @@ public class Menu {
     menu.scanner = new Scanner(System.in);
 
     Customer customer = customer.authenticateUser();
+    
     if(customer!=null){
       Account account = DataSource.getAccount(customer.getAccountId());
       menu.showMenu(customer, account);
@@ -39,5 +40,33 @@ public class Menu {
     }
 
     return customer;
+  }
+
+  private void showMenu(Customer customer, Account account){
+    
+    int selection = 0;
+
+    while(selection != 4 && customer.isAuthenticated()){
+      System.out.println("=============================");
+      System.out.println("Please select one of the following options:");
+      System.out.println("1. Deposit");
+      System.out.println("2. Withdraw");
+      System.out.println("3. Check Balance");
+      System.out.println("4. Exit ");
+      System.out.println("===============================");
+    
+      selection = scanner.nextInt();
+
+      double amount = 0;
+
+      switch (selection) {
+        case 1: 
+        System.out.println("How much would you like to deposit?");
+        amount = scanner.nextDouble();
+        account.deposit(amount);
+        break;
+      }
+
+    }
   }
 }
