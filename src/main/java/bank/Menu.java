@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
+import bank.exceptions.AmountException;
+
 public class Menu {
   Scanner scanner;
 
@@ -63,7 +65,31 @@ public class Menu {
         case 1: 
         System.out.println("How much would you like to deposit?");
         amount = scanner.nextDouble();
-        account.deposit(amount);
+        try{
+          account.deposit(amount);
+        } catch(AmountException e){
+          System.out.println(e.getMessage());
+          System.out.println("Please try again.");
+        }
+        break;
+
+        case 2:
+        System.out.println("How much would you like to withdraw");
+        amount = scanner.nextDouble();
+        account.withdraw(amount);
+        break;
+
+        case 3:
+        System.out.println("Current balance: " + account.getBalance());
+        break;
+
+        case 4:
+        Authenticator.logout(customer);
+        System.out.println(" Thanks for banking at Global Bank International");
+        break;
+        
+        default:
+        System.out.println(" Invalid option. Please try again.");
         break;
       }
 
